@@ -1,107 +1,132 @@
 {
-  "name": "xiaoshuo-readbooksonline",
-  "displayName": "xiaoshuo-readBooksOnline",
-  "description": "摸鱼看小说，可以自定义小说源",
-  "publisher": "xiaoshuo-readbooksonline",
-  "icon": "static/images/fish.png",
-  "keywords": [
-    "笔趣阁",
-    "reader",
-    "阅读",
-    "小说",
-    "摸鱼",
-    "起点",
-    "read"
-  ],
-  "repository": "https://github.com/dengjunjie-s/xiaoshuo-readBooksOnline",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.75.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "xiaoshuo-custom.loadBook",
-        "title": "载入小说"
-      },
-      {
-        "command": "xiaoshuo-custom.search",
-        "title": "搜索"
-      }
-    ],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "jiege-sidebar",
-          "title": "xiaoshuo",
-          "icon": "static/images/fish.svg"
-        }
-      ]
-    },
-    "views": {
-      "jiege-sidebar": [
-        {
-          "id": "jiege-sidebar-bookTree",
-          "name": "列表"
-        }
-      ]
-    },
-    "menus": {
-      "view/title": [
-        {
-          "command": "xiaoshuo-custom.loadBook",
-          "when": "view == jiege-sidebar-bookTree",
-          "group": "navigation"
-        },
-        {
-          "command": "xiaoshuo-custom.search",
-          "when": "view == jiege-sidebar-bookTree",
-          "group": "navigation"
-        }
-      ]
-    },
-    "configuration": {
-      "type": "object",
-      "title": "jiegexiaoshuo",
-      "properties": {
-        "jiege.bookStyle": {
-          "type": "string",
-          "default": "color:#686868; line-height:28px; font-size:16px; margin:0; padding:10px;",
-          "description": "配置小说窗口样式"
-        }
-      }
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/cheerio": "^0.22.31",
-    "@types/glob": "^8.0.1",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@types/vscode": "^1.75.0",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
-    "@vscode/test-electron": "^2.2.2",
-    "eslint": "^8.33.0",
-    "glob": "^8.1.0",
-    "mocha": "^10.1.0",
-    "typescript": "^4.9.4"
-  },
-  "dependencies": {
-    "axios": "^1.3.2",
-    "cheerio": "^1.0.0-rc.12",
-    "superagent": "^8.0.9",
-    "superagent-charset": "^1.2.0"
-  }
+	"name": "xiaoshuo-readbooksonline",
+	"displayName": "xiaoshuo-readBooksOnline",
+	"description": "摸鱼看小说，可以自定义小说源",
+	"publisher": "xiaoshuo-readbooksonline",
+	"icon": "static/images/fish.png",
+	"keywords": [
+		"笔趣阁",
+		"reader",
+		"阅读",
+		"小说",
+		"摸鱼",
+		"起点",
+		"read"
+	],
+	"repository": "https://github.com/dengjunjie-s/xiaoshuo-readBooksOnline",
+	"version": "0.1.2",
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "xiaoshuo-custom.loadHtml",
+				"title": "载入HTML"
+			},
+			{
+				"command": "xiaoshuo-custom.loadBook",
+				"title": "载入小说"
+			},
+			{
+				"command": "xiaoshuo-custom.search",
+				"title": "搜索"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "jiege-sidebar",
+					"title": "xiaoshuo",
+					"icon": "static/images/fish.svg"
+				}
+			]
+		},
+		"views": {
+			"jiege-sidebar": [
+				{
+					"id": "jiege-sidebar-bookTree",
+					"name": "列表"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "xiaoshuo-custom.loadHtml",
+					"when": "view == jiege-sidebar-bookTree",
+					"group": "navigation"
+				},
+				{
+					"command": "xiaoshuo-custom.loadBook",
+					"when": "view == jiege-sidebar-bookTree",
+					"group": "navigation"
+				},
+				{
+					"command": "xiaoshuo-custom.search",
+					"when": "view == jiege-sidebar-bookTree",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "jiegexiaoshuo",
+			"properties": {
+				"jiege.customSourcePath": {
+					"type": "string",
+					"description": "小说源配置文件路径"
+				},
+				"jiege.bookStyle": {
+					"type": "string",
+					"default": "color:#686868; line-height:28px; font-size:16px; margin:0; padding:10px;",
+					"description": "配置小说窗口样式"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile && yarn run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/cheerio": "^0.22.31",
+		"@types/glob": "^8.0.1",
+		"@types/mocha": "^10.0.1",
+		"@types/node": "16.x",
+		"@types/vscode": "^1.75.0",
+		"@typescript-eslint/eslint-plugin": "^5.49.0",
+		"@typescript-eslint/parser": "^5.49.0",
+		"@vscode/test-electron": "^2.2.2",
+		"eslint": "^8.33.0",
+		"glob": "^8.1.0",
+		"mocha": "^10.1.0",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"axios": "^1.3.2",
+		"cheerio": "^1.0.0-rc.12",
+		"puppeteer-core": "^21.3.8",
+		"superagent": "^8.0.9",
+		"superagent-charset": "^1.2.0"
+	},
+	"__metadata": {
+		"id": "4680d008-cc64-4377-a670-311875d0fe0b",
+		"publisherId": "c0dbf5ce-d5d2-43c7-aa4b-4686f937f44e",
+		"publisherDisplayName": "xiaoshuo-readbooksonline",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1697444020380,
+		"preRelease": false
+	}
 }

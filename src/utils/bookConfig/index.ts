@@ -1,19 +1,27 @@
 import baseConfig from "./baseConfig";
 import * as vscode from "vscode";
 class BookConfig {
-  constructor() {}
+  constructor() { }
   config = baseConfig[0];
   choiceConfig() {
     return new Promise(async (resolve) => {
       const sourceList = [...baseConfig];
+      const customPath = vscode.workspace.getConfiguration("jiege").get("customSourcePath") + "";
       //获取自定义源
-      const pickItem: any[] = [
-        {
-          label: "自定义小说源",
-        },
-      ];
+      if (customPath) {
+        try {
+          const customSource = await import(customPath);
+          customSource.forEach((element: any) => {
+            sourceList.push(element);
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      //获取自定义源
+      const pickItem: any[] = [];
       sourceList.forEach(({ label }, index) => {
-        pickItem.push({ label, index: index + 1 });
+        pickItem.push({ label, index });
       });
       const quickPick = vscode.window.createQuickPick<{
         label: string;
@@ -23,17 +31,8 @@ class BookConfig {
       quickPick.items = pickItem;
       quickPick.onDidChangeSelection(async (selection) => {
         let { label, index } = selection[0];
-        if (!index) {
-          quickPick.dispose();
-          this.config = JSON.parse(
-            (await vscode.window.showInputBox({
-              placeHolder: "小说源: 输入小说配置json",
-            })) + "",
-          );
-        } else {
-          this.config = sourceList[index - 1];
-          quickPick.dispose();
-        }
+        this.config = sourceList[index];
+        quickPick.dispose();
         resolve(true);
       });
       quickPick.onDidHide(() => {
