@@ -32,15 +32,6 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("xiaoshuo-custom.loadHtml", async () => {
-      let html = await vscode.window.showInputBox({
-        placeHolder: "加载html: 加载html代码",
-      });
-      ChaptersReadView.loadHtml(html + "");
-    })
-  );
-
-  context.subscriptions.push(
     vscode.commands.registerCommand(
       "xiaoshuo-custom.openTextInfo",
       (chaptersPath: any) => {
