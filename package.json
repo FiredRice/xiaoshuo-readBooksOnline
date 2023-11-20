@@ -14,7 +14,7 @@
 		"read"
 	],
 	"repository": "https://github.com/dengjunjie-s/xiaoshuo-readBooksOnline",
-	"version": "0.1.2",
+	"version": "0.1.4",
 	"engines": {
 		"vscode": "^1.75.0"
 	},
@@ -117,16 +117,5 @@
 		"puppeteer-core": "^21.3.8",
 		"superagent": "^8.0.9",
 		"superagent-charset": "^1.2.0"
-	},
-	"__metadata": {
-		"id": "4680d008-cc64-4377-a670-311875d0fe0b",
-		"publisherId": "c0dbf5ce-d5d2-43c7-aa4b-4686f937f44e",
-		"publisherDisplayName": "xiaoshuo-readbooksonline",
-		"targetPlatform": "undefined",
-		"isApplicationScoped": false,
-		"updated": true,
-		"isPreReleaseVersion": false,
-		"installedTimestamp": 1697444020380,
-		"preRelease": false
 	}
 }

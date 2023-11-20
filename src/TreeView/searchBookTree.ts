@@ -77,7 +77,9 @@ const getBookList = async (searchStr: string) => {
       : nameCode === "gbk"
       ? searchUrl.replace("${name}", gbk.encode(searchStr))
       : searchUrl.replace("${name}", searchStr);
+
   let data = await superagent(getCearchUrl, webCode ? webCode : "utf-8");
+
   const $ = cheerio.load(data);
 
   const bookList: Dependency[] = [];
